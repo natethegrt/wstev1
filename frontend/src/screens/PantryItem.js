@@ -34,6 +34,7 @@ const PantryItem = ({ route, navigation }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [nutrientData, setNutrientData] = useState(null);
   const [showNutrientModal, setShowNutrientModal] = useState(false);
+  const user = auth.currentUser;
   useEffect(() => {
     
     const fetchImage = async () => {
@@ -45,7 +46,7 @@ const PantryItem = ({ route, navigation }) => {
   }, [name]);
   const updateExpirationDate = async (date) => {
     try {
-      const pantryRef = doc(db, "pantries", user.uid, "items", id);
+      const pantryRef = doc(db, "pantry", user.uid, "items", id);
       await updateDoc(pantryRef, {
         expirationDate: date
       });

@@ -26,13 +26,13 @@ const Expiration = () => {
   const [itemImage, setItemImage] = useState(null);
   const [itemName, setItemName] = useState("");
   const [itemExpirationDate, setItemExpirationDate] = useState("");
-
+  const user = auth.currentUser;
   const closeModal = () => {
     setIsModalVisible(false);
     setItemImage(null);
     };
     useEffect(() => {
-      const user = auth.currentUser;
+      
       const q = query(
         collection(db, "pantry",user.uid,"items"),
         where(
@@ -78,7 +78,8 @@ const Expiration = () => {
 
 
 const handleDeleteItem = (id, name) => {
-const itemRef = doc(db, "pantries", user.uid, "items", id);
+
+const itemRef = doc(db, "pantry", user.uid, "items", id);
 deleteDoc(itemRef);
 setItemName(name);
 };

@@ -32,11 +32,11 @@ const Pantry = ({ navigation }) => {
   const [showNutrientModal, setShowNutrientModal] = useState(false);
   const [nutrientData, setNutrientData] = useState(null);
   const [pantryItems, setPantryItems] = useState([]);
-  
+  const user = auth.currentUser;
 
   // Fetch pantry items from Firestore and update state
   useEffect(() => {
-    const user = auth.currentUser;
+    
     const unsubscribe = navigation.addListener("focus", async () => {
       try {
         const querySnapshot = await getDocs(
@@ -58,7 +58,8 @@ const Pantry = ({ navigation }) => {
   // Delete an item from the pantry and update state
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "pantries", user.uid, "items", id));
+      
+      await deleteDoc(doc(db, "pantry", user.uid, "items", id));
       setPantryItems(pantryItems.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Error removing document: ", error);

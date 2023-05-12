@@ -32,7 +32,7 @@ const handleButtonClick = async () => {
         (doc) => doc.data().expirationDate.toDate() <= threeWeeksFromNow
     );
     const query = expiringItems.reduce(
-        (accumulator, currentItem) => `${accumulator} ${currentItem.data().name}`,
+        (accumulator, currentItem) => `${accumulator} ${currentItem.data().name},`,
         ""
     ).trim();
     setSearchQuery(query);

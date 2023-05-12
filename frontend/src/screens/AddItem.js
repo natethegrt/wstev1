@@ -9,10 +9,10 @@ const AddItem = ({ navigation }) => {
   const [itemName, setItemName] = useState("");
   const [expirationDate, setExpirationDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
-
+  const user = auth.currentUser;
   const handleSubmit = async () => {
     try {
-      const user = auth.currentUser;
+      
       const docRef = await addDoc(collection(db, "pantry",user.uid, "items"), {
         name: itemName,
         expirationDate: expirationDate
